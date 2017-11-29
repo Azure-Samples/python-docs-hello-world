@@ -1,3 +1,17 @@
+# ############################################################################
+ #
+ # Copyright (c) Microsoft Corporation. 
+ #
+ # This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
+ # copy of the license can be found in the License.html file at the root of this distribution. If 
+ # you cannot locate the Apache License, Version 2.0, please send an email to 
+ # vspython@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ # by the terms of the Apache License, Version 2.0.
+ #
+ # You must not remove this notice, or any other, from this software.
+ #
+ # ###########################################################################
+
 import datetime
 import os
 import sys
@@ -26,6 +40,19 @@ def log(txt):
             f.write('%s: %s' % (datetime.datetime.now(), txt))
         finally:
             f.close()
+
+ptvsd_secret = os.getenv('WSGI_PTVSD_SECRET')
+if ptvsd_secret:
+    log('Enabling ptvsd ...\n')
+    try:
+        import ptvsd
+        try:
+            ptvsd.enable_attach(ptvsd_secret)
+            log('ptvsd enabled.\n')
+        except: 
+            log('ptvsd.enable_attach failed\n')
+    except ImportError:
+        log('error importing ptvsd.\n')
 
 def get_wsgi_handler(handler_name):
     if not handler_name:
