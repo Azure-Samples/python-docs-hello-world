@@ -1,4 +1,13 @@
-# Python Flask app on Azure Web App for Containers
+---
+topic: Python Flask sample for Azure App Service (Linux)
+languages:
+  - python
+products:
+  - Azure App Service
+  - Azure Web Apps
+---
+
+# Python Flask sample for Azure App Service (Linux)
 
 This is a minimal sample app that demonstrates how to run a Python Flask application on Azure App Service on Linux.
 
