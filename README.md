@@ -12,7 +12,7 @@ products:
 
 This is a minimal sample app that demonstrates how to run a Python Flask application on Azure App Service on Linux.
 
-For more information, please see the [Python on App Service quickstart](https://docs.microsoft.com/en-us/azure/app-service/containers/quickstart-python).
+For more information, please see the [Python on App Service quickstart](https://docs.microsoft.com/azure/app-service/containers/quickstart-python).
 
 # Contributing
 
