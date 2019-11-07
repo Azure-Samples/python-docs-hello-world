@@ -1,0 +1,42 @@
+on: [push,pull_request]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    # checkout the repo
+    - uses: actions/checkout@master
+    
+    # install dependencies
+    - name: python install
+      run: |
+        sudo apt install python3.6-venv
+        python3.6 -m venv antenv
+        source antenv/bin/activate
+        pip3.6 install setuptools
+        pip3.6 install -r requirements.txt
+
+    # Archive built app
+    - name: archive myapp
+      run: |
+       zip -r myapp.zip .
+
+    # Azure login
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
+        
+    # deploy web app
+    - uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ahbilalFifthApp  # Replace with your app name
+        package: './myapp.zip'
+
+    # Add startup command in app service configuration if required
+
+    # Azure logout 
+    - name: logout
+      run: |
+        az logout
+        
