@@ -30,7 +30,7 @@ jobs:
     # deploy web app
     - uses: azure/webapps-deploy@v1
       with: 
-        app-name: ahbilalFifthApp  # Replace with your app name
+        app-name: http://ahbilalFifthApp  # Replace with your app name
         package: './myapp.zip'
 
     # Add startup command in app service configuration if required
