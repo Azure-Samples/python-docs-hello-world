@@ -1,26 +1,42 @@
-on: push
+on: [push,pull_request]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+
     # checkout the repo
-    - name: 'Checkout Github Action' 
-      uses: actions/checkout@master
+    - uses: actions/checkout@master
     
-    - name: Setup Node 10.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - name: 'npm install, build, and test'
+    # install dependencies
+    - name: python install
       run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-       
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v1
+        sudo apt install python3.6-venv
+        python3.6 -m venv antenv
+        source antenv/bin/activate
+        pip3.6 install setuptools
+        pip3.6 install -r requirements.txt
+
+    # Archive built app
+    - name: archive myapp
+      run: |
+       zip -r myapp.zip .
+
+    # Azure login
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
+        
+    # deploy web app
+    - uses: azure/webapps-deploy@v1
       with: 
-        app-name: node-rn
-        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        app-name: ahbilalFifthApp  # Replace with your app name
+        package: './myapp.zip'
+
+    # Add startup command in app service configuration if required
+
+    # Azure logout 
+    - name: logout
+      run: |
+        az logout
         
