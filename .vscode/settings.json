@@ -1,3 +1,36 @@
 {
-    "python.pythonPath": "/Users/ahmedbilal/Desktop/python-docs-hello-world/venv/bin/python3"
+    "python.pythonPath": "/Users/ahmedbilal/Desktop/python-docs-hello-world/venv/bin/python3",
+    "appService.zipIgnorePattern": [
+        "__pycache__{,/**}",
+        "*.py[cod]",
+        "*$py.class",
+        ".Python{,/**}",
+        "build{,/**}",
+        "develop-eggs{,/**}",
+        "dist{,/**}",
+        "downloads{,/**}",
+        "eggs{,/**}",
+        ".eggs{,/**}",
+        "lib{,/**}",
+        "lib64{,/**}",
+        "parts{,/**}",
+        "sdist{,/**}",
+        "var{,/**}",
+        "wheels{,/**}",
+        "share/python-wheels{,/**}",
+        "*.egg-info{,/**}",
+        ".installed.cfg",
+        "*.egg",
+        "MANIFEST",
+        ".env{,/**}",
+        ".venv{,/**}",
+        "env{,/**}",
+        "venv{,/**}",
+        "ENV{,/**}",
+        "env.bak{,/**}",
+        "venv.bak{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/29b1b042-cde5-4d09-b755-ae829ede1b38/resourceGroups/ahbilal_rg/providers/Microsoft.Web/sites/ahbilalFifthApp",
+    "appService.deploySubpath": ""
 }

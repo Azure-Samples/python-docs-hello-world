@@ -1,24 +1,3 @@
-from flask import Flask, request, redirect, url_for, flash, jsonify,render_template
-import numpy as np
-import pickle as p
-import json
-
-app = Flask(__name__)
-
-@app.route("/")
-def makecalc():
-    data = [[1, 1, 70, 1, 1, 100.25]]
-    qwe=2+2
-    listToStr = str(qwe)
-    #listToStr="hello"
-    return ('hello  is %s' % listToStr)
-    
-
-    #return np.array2string(np.sum(np.array(data)))
-    #data = request.get_json()
-    #prediction = np.array2string(model.predict(data))
-
-"""
 from flask import Flask, request, redirect, url_for, flash, jsonify
 import numpy as np
 import pickle as p
@@ -27,18 +6,32 @@ import json
 
 app = Flask(__name__)
 
+modelfile = 'model.pickle'
+model = p.load(open(modelfile, 'rb'))
 
-#@app.route('/api/', methods=['POST'])
-@app.route("/")
+@app.route('/api/', methods=['POST'])
 def makecalc():
-    data = [[1, 1, 70, 1, 1, 100.25]]
-    #data = request.get_json()
+    data = request.get_json()
     prediction = np.array2string(model.predict(data))
 
     return jsonify(prediction)
 
 if __name__ == '__main__':
-    modelfile = 'model.pickle'
+    modelfile = 'models/final_prediction.pickle'
     model = p.load(open(modelfile, 'rb'))
-    app.run()
-    """
+    app.run(debug=True, host='0.0.0.0')
+
+
+"""
+app = Flask(__name__)
+
+modelfile = 'model.pickle'
+model = p.load(open(modelfile, 'rb'))
+
+@app.route("/")
+def makecalc():
+    data = [[1, 1, 70, 1, 1, 100.25]]
+    prediction = np.array2string(model.predict(data))
+    return prediction
+
+"""
