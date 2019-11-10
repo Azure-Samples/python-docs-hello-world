@@ -1,14 +1,14 @@
 from flask import Flask, request, redirect, url_for, flash, jsonify,render_template
-#import numpy as np
-#import pickle as p
-#import json
+import numpy as np
+import pickle as p
+import json
 
 app = Flask(__name__)
 
 @app.route("/")
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
-    listToStr = ' '.join(map(str, data)) 
+    listToStr = np.array2string(np.sum(np.array(data)))
     #return listToStr
     return 'Answer is %s' % listToStr
 
