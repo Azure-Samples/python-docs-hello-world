@@ -15,7 +15,7 @@ def makecalc():
     return jsonify(prediction)
 
 if __name__ == '__main__':
-    modelfile = 'models/final_prediction.pickle'
+    modelfile = 'model.pickle'
     model = p.load(open(modelfile, 'rb'))
-    app.run(debug=False, host='0.0.0.0')
+    app.run()
     
