@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, jsonify
-import numpy as np
-import pickle as p
-import json
+#import numpy as np
+#import pickle as p
+#import json
 
 app = Flask(__name__)
 
@@ -9,7 +9,8 @@ app = Flask(__name__)
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
     listToStr = ' '.join(map(str, data)) 
-    return listToStr
+    #return listToStr
+    return "hey"
     #return np.array2string(np.sum(np.array(data)))
     #data = request.get_json()
     #prediction = np.array2string(model.predict(data))
