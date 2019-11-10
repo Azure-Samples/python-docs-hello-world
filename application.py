@@ -1,9 +1,17 @@
-from flask import Flask
+from flask import Flask, request, redirect, url_for, flash, jsonify
+import numpy as np
+import pickle as p
+import json
+
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def makecalc():
+    data = [[1, 1, 70, 1, 1, 100.25]]
+    return np.array2string(np.sum(np.array(data)))
+    #data = request.get_json()
+    #prediction = np.array2string(model.predict(data))
+
 
 """
 from flask import Flask, request, redirect, url_for, flash, jsonify
