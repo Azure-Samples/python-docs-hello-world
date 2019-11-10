@@ -7,9 +7,11 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/api/', methods=['POST'])
+#@app.route('/api/', methods=['POST'])
+@app.route("/")
 def makecalc():
-    data = request.get_json()
+    data = [[1, 1, 70, 1, 1, 100.25]]
+    #data = request.get_json()
     prediction = np.array2string(model.predict(data))
 
     return jsonify(prediction)
