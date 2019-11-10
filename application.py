@@ -9,9 +9,9 @@ app = Flask(__name__)
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
     #listToStr = np.array2string(np.sum(np.array(data)))
-    listToStr="hello"
+    #listToStr="hello"
     #return listToStr
-    return 'Answer is %s' % listToStr
+    return 'hello'
 
     #return np.array2string(np.sum(np.array(data)))
     #data = request.get_json()
