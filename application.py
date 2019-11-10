@@ -9,7 +9,7 @@ app = Flask(__name__)
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
     qwe=2+2
-    listToStr = np.array2string(np.sum(np.array(data)))
+    listToStr = qwe
     #listToStr="hello"
     return listToStr
     
