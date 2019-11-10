@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, url_for, flash, jsonify,render_template
-import numpy as np
+#import numpy as np
 import pickle as p
 import json
 
@@ -8,10 +8,12 @@ app = Flask(__name__)
 @app.route("/")
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
+    qwe=2+2
     #listToStr = np.array2string(np.sum(np.array(data)))
     #listToStr="hello"
+    return "hello"
     #return listToStr
-    return 'hello'
+    
 
     #return np.array2string(np.sum(np.array(data)))
     #data = request.get_json()
