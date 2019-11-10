@@ -8,7 +8,8 @@ app = Flask(__name__)
 @app.route("/")
 def makecalc():
     data = [[1, 1, 70, 1, 1, 100.25]]
-    return np.array2string(np.sum(np.array(data)))
+    return print(data)
+    #return np.array2string(np.sum(np.array(data)))
     #data = request.get_json()
     #prediction = np.array2string(model.predict(data))
 
