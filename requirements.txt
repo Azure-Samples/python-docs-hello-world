@@ -4,3 +4,8 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 Werkzeug==0.14.1
+dash==1.6.0
+dash-core-components==1.5.0
+dash-daq==0.3.0
+dash-html-components==1.0.1
+dash-renderer==1.2.0
