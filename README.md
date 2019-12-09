@@ -8,6 +8,8 @@ products:
 - azure-app-service
 ---
 
+[![Run on Repl.it](https://repl.it/badge/github/Azure-Samples/python-docs-hello-world)](https://repl.it/github/Azure-Samples/python-docs-hello-world)
+
 # Python Flask sample for Azure App Service (Linux)
 
 This is a minimal sample app that demonstrates how to run a Python Flask application on Azure App Service on Linux.
