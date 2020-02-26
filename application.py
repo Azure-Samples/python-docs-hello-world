@@ -1,9 +1,9 @@
 from flask import Flask
-import pandas
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    print("test")
     return "Hola World!"
 
 #from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
