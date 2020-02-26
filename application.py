@@ -3,7 +3,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return print(dir())
+    a = print(dir())
+    return a
 
 
 #from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
