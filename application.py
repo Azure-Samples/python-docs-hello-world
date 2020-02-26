@@ -1,4 +1,5 @@
 from flask import Flask
+import azure
 app = Flask(__name__)
 
 @app.route("/")
