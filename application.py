@@ -1,11 +1,9 @@
 from flask import Flask
 app = Flask(__name__)
 
-print("test")
-
-#@app.route("/")
-#def hello():
-#    return "Hola World!"
+@app.route("/")
+def hello():
+    return print(dir())
 
 
 #from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
