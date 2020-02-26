@@ -1,6 +1,11 @@
-from flask import Flask
-app = Flask(__name__)
+#from flask import Flask
+#app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+#@app.route("/")
+#def hello():
+#    return "Hello World!"
+
+from azure.ai.textanalytics import TextAnalyticsClient, TextAnalyticsApiKeyCredential
+from azure.storage.blob import BlockBlobService, BlobServiceClient, BlobClient, ContainerClient
+print(dir())
+print("Hola")
