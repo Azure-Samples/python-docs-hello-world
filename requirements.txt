@@ -4,3 +4,5 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 Werkzeug==0.14.1
+azure.ai.textanalytics==1.0.0b2
+azure.storage.blob==1.5.0
