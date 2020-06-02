@@ -1,3 +1,4 @@
+bottle==0.12.18
 click==6.7
 Flask==1.0.2
 itsdangerous==0.24
