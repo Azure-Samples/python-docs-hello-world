@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,render_template_string
-from flask import Flask,render_template,request,render_template_string
+from flask import Flask,render_template,render_template_string
 app = Flask(__name__)
 
 @app.route('/',methods=["get","post"])
