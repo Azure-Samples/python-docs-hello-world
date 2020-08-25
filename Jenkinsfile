@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo 'Hello build stage!'
                 echo "Hello build ${env.BUILD_ID}"
+                checkout scm
                 //checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                 //    userRemoteConfigs: [[url: 'https://github.com/Merlion-Crew/python-docs-hello-world.git/']]])
 
