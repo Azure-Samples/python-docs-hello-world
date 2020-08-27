@@ -7,3 +7,4 @@ Werkzeug==0.14.1
 pytest
 coverage
 wheel
+twine
