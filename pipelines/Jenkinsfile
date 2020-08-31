@@ -74,7 +74,7 @@ pipeline {
             steps {
                 echo 'Deploying!'
                 sh '''
-                    curl -X POST -u '\$upskilltoan-app-service':RhxlfkpJYYXBufdoxT3ZfCYSB2ZPQr59MJvBpQtwKAiRE7nmEucAlWxcJRa6 --data-binary @"deployment-${BUILD_NUMBER}.zip" https://upskilltoan-app-service.scm.azurewebsites.net/api/zipdeploy
+                    curl -X POST -u '${app_service_deployment_username}':${app_service_deployment_password} --data-binary @"deployment-${BUILD_NUMBER}.zip" https://upskilltoan-app-service.scm.azurewebsites.net/api/zipdeploy
                 '''
             }
             post {
