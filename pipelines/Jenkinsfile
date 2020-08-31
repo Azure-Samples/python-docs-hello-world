@@ -16,20 +16,23 @@ pipeline {
                 echo 'Hello build stage!'
                 echo "Hello build ${env.BUILD_ID}"
                 checkout scm
-                
-                sh """
-                    ls
-                    pip3 install -r requirements.txt
-                """
+
+                withPythonEnv('python3') {
+                    sh """
+                        pip3 install -r requirements.txt
+                    """
+                }
             }
         }
         stage('test') {
             steps {
                 echo 'Hello test stage!'
-                sh """
-                    python3 -m pytest
-                    python3 -m coverage xml test_flask.py
-                """
+                withPythonEnv('python3') {
+                    sh """
+                        python3 -m pytest
+                        python3 -m coverage xml test_flask.py
+                    """
+                }
             }
             post {
                 always {
