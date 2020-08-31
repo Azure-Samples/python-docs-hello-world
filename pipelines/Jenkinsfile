@@ -16,9 +16,7 @@ pipeline {
                 echo 'Hello build stage!'
                 echo "Hello build ${env.BUILD_ID}"
                 checkout scm
-                //checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                //    userRemoteConfigs: [[url: 'https://github.com/Merlion-Crew/python-docs-hello-world.git/']]])
-
+                
                 sh """
                     ls
                     pip3 install -r requirements.txt
@@ -62,7 +60,7 @@ pipeline {
                 sh "zip -r deployment-${BUILD_NUMBER}.zip ."
             }
         }
-        stage('Approval') {
+        stage('Approval to deploy Prod env') {
             // no agent, so executors are not used up when waiting for approvals
             agent none
             steps {
