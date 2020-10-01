@@ -4,8 +4,8 @@ description: "A minimal sample app that can be used to demonstrate deploying Fla
 languages:
 - python
 products:
-- azure
-- azure-app-service
+- Azure
+- Azure-app-service
 ---
 
 # Python Flask sample for Azure App Service (Linux)
@@ -16,4 +16,4 @@ For instructions on running and deploying the code, see [Quickstart: Create a Py
 
 ## Contributing
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
