@@ -34,6 +34,23 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
+
+
+
+#Hello World in different programmig languages!
+
+
+print("Hello World")
+#In Python
+
+#include <stdio.h> 
+int main() {
+// printf() displays the string inside quotation printf("Hello, World!"); 
+return 0; } 
+Output. Hello, World!
+#In C Language
+
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
