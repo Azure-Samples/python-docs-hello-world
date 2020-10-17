@@ -1,1 +1,11 @@
-Flask>=1.0,<=1.1.2
+click==7.1.2
+Flask==1.1.2
+Flask-MySQL==1.5.1
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+mysql-connector-python==8.0.21
+protobuf==3.13.0
+PyMySQL==0.10.1
+six==1.15.0
+Werkzeug==1.0.1
