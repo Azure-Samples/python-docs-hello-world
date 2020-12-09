@@ -34,3 +34,12 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+- task: PublishBuildArtifacts@1
+  inputs:
+    azureSubscription: '7133afd3-c71c-4f13-9320-ab6f3543c8c2'
+    appType: 'functionApp'
+    appName: 'funcapp-test'
+    package: '$(System.DefaultWorkingDirectory)'
+    appSettings: 
+    deploymentMethod: 'auto'
+
