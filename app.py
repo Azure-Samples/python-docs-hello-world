@@ -1,6 +1,3 @@
-from flask import Flask
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    return "Hello, World!"
+from time import sleep
+print("Hello World!")
+sleep(1000)
