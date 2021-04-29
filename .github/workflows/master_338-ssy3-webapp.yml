@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: '338-ssy3-webapp'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_5c6f5b5f277e4d8e99145e9f89a39594 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_3c75f32b4a594318ac212c367c263baf }}
