@@ -34,5 +34,5 @@ jobs:
       with:
         app-name: webapps-privateDns-jpeast
         slot-name: Production
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FA322E18A5254B14B2C0E554D36BFE60 }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7143D6D6035F4DE0B8510297153BB820 }}
 
