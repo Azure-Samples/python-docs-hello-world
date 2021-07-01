@@ -8,4 +8,4 @@ def hello():
 
 @app.route("/hola")
 def hola():
-    return "Hello, Deepdatas 1234!"
+    return "<h1 style="color:orange;">Hello, Deepdatas 1234!</h1>"
