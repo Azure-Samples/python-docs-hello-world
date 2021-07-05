@@ -7,5 +7,5 @@ def hello():
 
 
 @app.route("/login")
-def hello():
+def login():
     render_template('login.html')
