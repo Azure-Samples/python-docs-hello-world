@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'bootstrap/base.html'%}
+
+{% block head %}
+
+
     <title>{% block title %}Deepdatas - {% endblock %}</title>
 
         <!-- Meta -->
@@ -17,10 +19,11 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-</head>
-<body>
-	{% block body %} 
+{% endblock %}
 
-	{% endblock %}
-</body>
+
+{% block body %} 
+
+{% endblock %}
+
 </html>
