@@ -1,31 +1,26 @@
-{% extends 'bootstrap/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Deepdatas - {% endblock %}</title>
 
-{% block head %}
-    {{ super() }}
-
-    <title>
-        {% block title %}Deepdatas - Portal{% endblock %}
-    </title>
+        <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-{% endblock %}
+    <meta name="description" content="Portal - Deepdatas">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-{% block body %}
-    {% block navbar %}
-        {% include 'navbar.html' %}
-    {% endblock %}
+</head>
+<body>
+	{% block body %} 
 
-    {% for message in get_flashed_messages() %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button"
-                    data-dismiss="alert"
-                    class="close">&times;</button>
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    {% block content %}{% endblock %}
-    {% block scripts %}
-        {{ super() }}
-    {% endblock %}
-{% endblock %}
+	{% endblock %}
+</body>
+</html>
