@@ -11,8 +11,10 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
+
 
 @app.route("/")
 def hello():
@@ -33,7 +35,7 @@ def index():
 class User(db.Model):
 	__tablename__ = 'User'
 	id = db.Column(db.Integer, primary_key = True)
-	email = db.Column(db.String(64), unique=True)
+	user = db.Column(db.String(64), unique=True)
 	password = db.Column(db.String(64))
 	azure_item_id = db.Column(db.String(64))
 
@@ -41,16 +43,3 @@ class User(db.Model):
 		return '<User %r>' % self.username
 
 
-itorres = User(email='itorres@deepdatas.com', password='1234', azure_item_id='test_id')
-fbloise = User(email='fbloise@deepdatas.com', password='2345', azure_item_id='test_id')
-mgarcia = User(email='mgarcia@deepdatas.com', password='3456', azure_item_id='test_id')
-
-db.session.add_all([itorres, fbloise, mgarcia])
-
-db.session.commit()
-
-db.drop_all()
-
-db.create_all()
-
-print(itorres.email)
