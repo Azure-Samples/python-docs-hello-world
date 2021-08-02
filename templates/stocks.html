@@ -1,0 +1,17 @@
+{% extends 'base.jinja2' %}
+
+{% block content %}
+{% for ticker_id, ticker in tickers.items() %}
+    <li>{{ tickers[ticker_id]['symbol'] }}</a></li>
+{% endfor %}
+<form method="POST">
+    <div class="input-field col s2" style="width:600px">
+        <input id="icon_prefix" name="symbol" type="text" class="validate">
+        <label for="icon_prefix">Search ticker symbol</label>
+        <button class="btn waves-effect waves-light" type="text" name="symbol">Search
+            <i class="material-icons right">search</i>
+        </button>
+    </div>
+</form>
+
+{% endblock %}
