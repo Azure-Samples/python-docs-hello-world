@@ -71,9 +71,9 @@ os.chdir("/Users/astralconvict/python-docs-hello-world")
 endpoint = 'https://data.alpaca.markets/v2'
 key = json.loads(open("key.txt", 'r').read())
 
-symbol = "aapl"
+symbol = "msft"
 bar_url = endpoint + "/stocks/{}/bars".format(symbol)
-params = {"start": "2021-07-20",
+params = {"start": "2020-07-20",
             "limit": 600,
             "timeframe": "1Day"
         }
@@ -81,9 +81,11 @@ params = {"start": "2021-07-20",
 @app.route('/stock-data')
 def stock_data():
     data = {"bars": [], "next_page_token": '', "symbol": symbol}
+    dataTime = ["test"]
     while True:
         r = requests.get(bar_url, headers=key, params=params)
         r = r.json()
+        dataTime += r["bars"][0]["t"]
         if r["next_page_token"] is None:
             data["bars"] += r["bars"]
             break
@@ -91,7 +93,8 @@ def stock_data():
             params["page_token"] = r["next_page_token"]
             data["bars"] += r["bars"]
             data["next_page_token"] = r["next_page_token"]
-    return render_template("dashboard.html", data=data)
+        
+    return render_template("dashboard.jinja2", data=data, dataTime=dataTime)
 
 
 
