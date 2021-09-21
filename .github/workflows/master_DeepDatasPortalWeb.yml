@@ -20,7 +20,7 @@ jobs:
     - name: Set up Python version
       uses: actions/setup-python@v1
       with:
-        python-version: '3.8'
+        python-version: '3.9'
 
     - name: Create and start virtual environment
       run: |
@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'DeepDatasPortalWeb'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_c26aee3a3409483281729414738f6778 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_c319a7003ec64800ba9fcc7f01ba00b8 }}
