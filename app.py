@@ -17,8 +17,6 @@ db = SQLAlchemy(app)
 
 
 @app.route("/")
-def hello():
-    return "Hello, World 12345!"
 
 @app.route("/login")
 def login():
