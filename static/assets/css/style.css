@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #37517e;
+  background: #000000d6;
 }
 
 #preloader:before {
@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #37517e;
+  border: 6px solid #000000d6;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-scrolled, #header.header-inner-pages {
-  background: rgba(40, 58, 90, 0.9);
+  background: #000000d6;
 }
 
 #header .logo {
@@ -293,7 +293,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(40, 58, 90, 0.9);
+  background: #000000d6;
   transition: 0.3s;
   z-index: 999;
 }
@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile a {
   padding: 10px 20px;
   font-size: 15px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
@@ -330,7 +330,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-mobile .getstarted {
   margin: 15px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .navbar-mobile .dropdown ul {
@@ -371,7 +371,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 80vh;
-  background: #37517e;
+  background: #000000d6;
 }
 
 #hero .container {
@@ -520,7 +520,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .section-title h2::before {
@@ -644,7 +644,7 @@ section {
 .why-us .content h3 {
   font-weight: 400;
   font-size: 34px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .why-us .content h4 {
@@ -765,7 +765,7 @@ section {
 .skills .content h3 {
   font-weight: 700;
   font-size: 32px;
-  color: #37517e;
+  color: #000000d6;
   font-family: "Poppins", sans-serif;
 }
 
@@ -802,7 +802,7 @@ section {
   display: block;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .skills .progress .skill .val {
@@ -849,7 +849,7 @@ section {
 }
 
 .services .icon-box h4 a {
-  color: #37517e;
+  color: #000000d6;
   transition: ease-in-out 0.3s;
 }
 
@@ -871,7 +871,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url("../img/cta-bg.jpg") fixed center center;
+  background: linear-gradient(#000000d6, #000000d6), url("../img/cta-bg.jpg") fixed center center;
   background-size: cover;
   padding: 120px 0;
 }
@@ -1108,7 +1108,7 @@ section {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .team .member span {
@@ -1154,7 +1154,7 @@ section {
 }
 
 .team .member .social a i {
-  color: #37517e;
+  color: #000000d6;
   font-size: 16px;
   margin: 0 2px;
 }
@@ -1191,12 +1191,12 @@ section {
   font-weight: 500;
   margin-bottom: 15px;
   font-size: 20px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .pricing h4 {
   font-size: 48px;
-  color: #37517e;
+  color: #000000d6;
   font-weight: 400;
   font-family: "Jost", sans-serif;
   margin-bottom: 25px;
@@ -1357,7 +1357,7 @@ section {
 }
 
 .faq .faq-list a.collapsed {
-  color: #37517e;
+  color: #000000d6;
   transition: 0.3s;
 }
 
@@ -1410,7 +1410,7 @@ section {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .contact .info p {
@@ -1593,7 +1593,7 @@ section {
 .breadcrumbs h2 {
   font-size: 28px;
   font-weight: 600;
-  color: #37517e;
+  color: #000000d6;
 }
 
 .breadcrumbs ol {
@@ -1621,7 +1621,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   font-size: 14px;
-  background: #37517e;
+  background: #000000d6;
 }
 
 #footer .footer-newsletter {
@@ -1638,7 +1638,7 @@ section {
   padding: 0;
   line-height: 1;
   font-weight: 600;
-  color: #37517e;
+  color: #000000d6;
 }
 
 #footer .footer-newsletter form {
@@ -1693,7 +1693,7 @@ section {
   line-height: 1;
   text-transform: uppercase;
   font-weight: 600;
-  color: #37517e;
+  color: #000000d6;
 }
 
 #footer .footer-top .footer-contact p {
@@ -1707,7 +1707,7 @@ section {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #37517e;
+  color: #000000d6;
   position: relative;
   padding-bottom: 12px;
 }
