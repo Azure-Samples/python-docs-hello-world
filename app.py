@@ -2,9 +2,19 @@
 import json
 from flask import Flask, request,  jsonify
 from datetime import datetime
+import pyodbc
 
 
 app = Flask(__name__)
+
+server = 'dblocator.database.windows.net'
+database = 'locatorserver'
+username = 'AdminLocator'
+password = 'LovelyLocator1!'
+driver = '{ODBC Driver 17 for SQL Server}'
+
+sCon = 'DRIVER='+driver+';SERVER=tcp:'+server + \
+    ';PORT=1433;DATABASE='+database+';UID='+username+';PWD=' + password
 
 
 # def InsertLocation(lot, lat, phoneid, dt):
@@ -22,8 +32,18 @@ def TestConnectio():
 
 @app.route("/")
 def hello():
+    con = pyodbc.connect(sCon)
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM test")
+    rows = cursor.fetchall()
+    s = ""
+    for row in rows:
+        for field in row:
+            s += str(field)+" "
+
     print("Handling request to home page.")
-    return "Hello, Azure1!"
+    con.close()
+    return "Hello, Azure2!"+s
 
 
 # @app.route("/location", methods=['POST'])
@@ -47,4 +67,4 @@ def hello():
 #         print(ex)
 
 
-# app.run()
+app.run()
