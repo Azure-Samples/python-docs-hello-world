@@ -17,17 +17,43 @@ sCon = 'DRIVER='+driver+';SERVER=tcp:'+server + \
     ';PORT=1433;DATABASE='+database+';UID='+username+';PWD=' + password
 
 
-# def InsertLocation(lot, lat, phoneid, dt):
-#     mycursor = mydb.cursor()
-#     sql = "INSERT INTO location (lot, lat,phoneid,dt) VALUES (%s, %s,%d,%d)"
-#     val = (lot, lat, phoneid, dt)
-#     mycursor.execute(sql, val)
-#     mydb.commit()
+def InsertLocation(lot, lat, dt, phoneid):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.Location(Longitute, Latitude,dt,phoneid) VALUES (?,?,?,?) "
+
+        mycursor.execute(sql, (lot, lat, dt, phoneid))
+        con.commit()
+        con.close()
+    except Exception as ex:
+        print(ex)
 
 
 @app.route("/testconnection")
 def TestConnectio():
     return "Works"
+
+
+@app.route("/location", methods=['POST'])
+def location():
+
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    x = 1
+    Longitute = d['longitude']
+    Latitude = d['latitude']
+    dt = d['datetime']
+    phoneid = d['phoneid']
+    try:
+        date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+
+    InsertLocation(Longitute, Latitude, date_time_obj, phoneid)
+
+    x = 2
 
 
 @app.route("/")
