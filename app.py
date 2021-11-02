@@ -26,6 +26,7 @@ def InsertLocation(lot, lat, dt, phoneid):
         mycursor.execute(sql, (lot, lat, dt, phoneid))
         con.commit()
         con.close()
+        return "Succeded"
     except Exception as ex:
         return str(ex)
 
@@ -51,9 +52,7 @@ def location():
     except Exception as ex:
         print(ex)
 
-    InsertLocation(Longitute, Latitude, date_time_obj, phoneid)
-
-    x = 2
+    return InsertLocation(Longitute, Latitude, date_time_obj, phoneid)
 
 
 @app.route("/")
