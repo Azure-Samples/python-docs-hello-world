@@ -32,18 +32,21 @@ def TestConnectio():
 
 @app.route("/")
 def hello():
-    con = pyodbc.connect(sCon)
-    cursor = con.cursor()
-    cursor.execute("SELECT * FROM test")
-    rows = cursor.fetchall()
-    s = ""
-    for row in rows:
-        for field in row:
-            s += str(field)+" "
+    try:
+        con = pyodbc.connect(sCon)
+        cursor = con.cursor()
+        cursor.execute("SELECT * FROM test")
+        rows = cursor.fetchall()
+        s = ""
+        for row in rows:
+            for field in row:
+                s += str(field)+" "
 
-    print("Handling request to home page.")
-    con.close()
-    return "Hello, Azure2!"+s
+        print("Handling request to home page.")
+        con.close()
+        return "Hello, Azure2!"+s
+    except Exception as ex:
+        return (str(ex))
 
 
 # @app.route("/location", methods=['POST'])
@@ -65,6 +68,5 @@ def hello():
 #         # phoneid = request.form.get('phoneid')
 #     except Exception as ex:
 #         print(ex)
-
 
 # app.run()
