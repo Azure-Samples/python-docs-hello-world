@@ -27,7 +27,7 @@ def InsertLocation(lot, lat, dt, phoneid):
         con.commit()
         con.close()
     except Exception as ex:
-        print(ex)
+        return str(ex)
 
 
 @app.route("/testconnection")
