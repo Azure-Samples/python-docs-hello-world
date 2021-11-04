@@ -17,13 +17,13 @@ sCon = 'DRIVER='+driver+';SERVER=tcp:'+server + \
     ';PORT=1433;DATABASE='+database+';UID='+username+';PWD=' + password
 
 
-def InsertLocation(lot, lat, dt, phoneid):
+def InsertLocation(lot, lat, dt, phoneid, accuracy, speed):
     try:
         con = pyodbc.connect(sCon)
         mycursor = con.cursor()
-        sql = "INSERT INTO dbo.Location(Longitute, Latitude,dt,phoneid) VALUES (?,?,?,?) "
+        sql = "INSERT INTO dbo.Location(Longitute, Latitude,dt,phoneid,accuracy,speed) VALUES (?,?,?,?,?,?) "
 
-        mycursor.execute(sql, (lot, lat, dt, phoneid))
+        mycursor.execute(sql, (lot, lat, dt, phoneid, accuracy, speed))
         con.commit()
         con.close()
         return "Succeded"
@@ -47,12 +47,14 @@ def location():
     Latitude = d['latitude']
     dt = d['datetime']
     phoneid = d['phoneid']
+    accuracy = d['accuracy']
+    speed = d['speed']
     try:
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
     except Exception as ex:
         print(ex)
 
-    return InsertLocation(Longitute, Latitude, date_time_obj, phoneid)
+    return InsertLocation(Longitute, Latitude, date_time_obj, phoneid, accuracy, speed)
 
 
 @app.route("/")
@@ -94,4 +96,4 @@ def hello():
 #     except Exception as ex:
 #         print(ex)
 
-# app.run()
+app.run()
