@@ -93,7 +93,9 @@ def getName():
     dic = {}
     dic["name"] = "xxxx"
     dic["age"] = 23
+    dic["num"] = 17
     data = json.dumps(dic)
+
     return data
 
 
