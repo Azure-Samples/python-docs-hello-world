@@ -17,6 +17,20 @@ sCon = 'DRIVER='+driver+';SERVER=tcp:'+server + \
     ';PORT=1433;DATABASE='+database+';UID='+username+';PWD=' + password
 
 
+def InsertWifi(ssid, mac, level, phoneid, dt):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.Wifi(ssid, mac, level, phoneid,dt) VALUES (?,?,?,?,?) "
+
+        mycursor.execute(sql, (ssid, mac, level, phoneid, dt))
+        con.commit()
+        con.close()
+        return "Succeded"
+    except Exception as ex:
+        return str(ex)
+
+
 def InsertLocation(lot, lat, dt, phoneid, accuracy, speed):
     try:
         con = pyodbc.connect(sCon)
@@ -34,6 +48,23 @@ def InsertLocation(lot, lat, dt, phoneid, accuracy, speed):
 @app.route("/testconnection")
 def TestConnectio():
     return "Works"
+
+
+@app.route("/wifi", methods=['POST'])
+def wifi():
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    ssid = d['ssid']
+    mac = d['mac']
+    level = d['level']
+    phoneid = d['phoneid']
+    dt = d['dt']
+    try:
+        date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+    return InsertWifi(ssid, mac, level, phoneid, date_time_obj)
 
 
 @app.route("/location", methods=['POST'])
@@ -55,6 +86,15 @@ def location():
         print(ex)
 
     return InsertLocation(Longitute, Latitude, date_time_obj, phoneid, accuracy, speed)
+
+
+@app.route("/getName")
+def getName():
+    dic = {}
+    dic["name"] = "xxxx"
+    dic["age"] = 23
+    data = json.dumps(dic)
+    return data
 
 
 @app.route("/")
