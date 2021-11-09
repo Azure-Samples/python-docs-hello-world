@@ -1,4 +1,4 @@
-#from requests import request
+# from requests import request
 import json
 from flask import Flask, request,  jsonify
 from datetime import datetime
@@ -31,6 +31,20 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
         return str(ex)
 
 
+def InsertBluetooth(name, code, address, rssi, phoneid, dt):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.Bluetooth(namex, codex,addressx,rssi,phoneid,dt) VALUES (?,?,?,?,?,?) "
+
+        mycursor.execute(sql, (name, code, address, rssi, phoneid, dt))
+        con.commit()
+        con.close()
+        return "Succeded"
+    except Exception as ex:
+        return str(ex)
+
+
 def InsertLocation(lot, lat, dt, phoneid, accuracy, speed):
     try:
         con = pyodbc.connect(sCon)
@@ -50,6 +64,24 @@ def TestConnectio():
     return "Works"
 
 
+@app.route("/bluetooth", methods=['POST'])
+def bluetooth():
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    name = d['name']
+    code = d['code']
+    address = d['address']
+    rssi = d['rssi']
+    phoneid = d['phoneid']
+    dt = d['dt']
+    try:
+        date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+    return InsertBluetooth(name, code, address, rssi, phoneid, date_time_obj)
+
+
 @app.route("/wifi", methods=['POST'])
 def wifi():
     data = request.get_data()
@@ -67,7 +99,7 @@ def wifi():
     return InsertWifi(ssid, mac, level, phoneid, date_time_obj)
 
 
-@app.route("/location", methods=['POST'])
+@ app.route("/location", methods=['POST'])
 def location():
 
     data = request.get_data()
@@ -88,7 +120,7 @@ def location():
     return InsertLocation(Longitute, Latitude, date_time_obj, phoneid, accuracy, speed)
 
 
-@app.route("/getName")
+@ app.route("/getName")
 def getName():
     dic = {}
     dic["name"] = "xxxx"
@@ -99,7 +131,7 @@ def getName():
     return data
 
 
-@app.route("/")
+@ app.route("/")
 def hello():
     try:
         con = pyodbc.connect(sCon)
@@ -138,4 +170,4 @@ def hello():
 #     except Exception as ex:
 #         print(ex)
 
-# app.run()
+app.run()
