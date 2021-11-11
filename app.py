@@ -3,6 +3,7 @@ import json
 from flask import Flask, request,  jsonify
 from datetime import datetime
 import pyodbc
+import random
 
 
 app = Flask(__name__)
@@ -24,6 +25,21 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
         sql = "INSERT INTO dbo.Wifi(ssid, mac, level, phoneid,dt) VALUES (?,?,?,?,?) "
 
         mycursor.execute(sql, (ssid, mac, level, phoneid, dt))
+        con.commit()
+        con.close()
+        return "Succeded"
+    except Exception as ex:
+        return str(ex)
+
+
+def InsertPhoneInfo(phoneid, phonenumber, imei, serialNumber, simOperator, dt):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.phone(phoneid, phonenumber, imei, serialNumber, simOperator,dt) VALUES (?,?,?,?,?,?) "
+
+        mycursor.execute(sql, (phoneid, phonenumber, imei,
+                         serialNumber, simOperator, dt))
         con.commit()
         con.close()
         return "Succeded"
@@ -75,6 +91,7 @@ def bluetooth():
     rssi = d['rssi']
     phoneid = d['phoneid']
     dt = d['dt']
+
     try:
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
     except Exception as ex:
@@ -97,6 +114,26 @@ def wifi():
     except Exception as ex:
         print(ex)
     return InsertWifi(ssid, mac, level, phoneid, date_time_obj)
+
+
+@app.route("/setup", methods=['POST'])
+def setup():
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    serialNmber = d['serialNmber']
+    imei = d['imei']
+    phonenumber = d['phonenumber']
+    simOperator = d['simOperator']
+    phoneid = random.randint(100000, 200000)
+    dt = d['dt']
+    try:
+        date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+
+    InsertPhoneInfo(phoneid, phonenumber, imei,
+                    serialNmber, simOperator, date_time_obj)
 
 
 @ app.route("/location", methods=['POST'])
@@ -170,4 +207,4 @@ def hello():
 #     except Exception as ex:
 #         print(ex)
 
-# app.run()
+app.run()
