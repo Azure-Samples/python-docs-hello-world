@@ -121,11 +121,11 @@ def setup():
     data = request.get_data()
     sData = data.decode('utf-8')
     d = json.loads(sData)
-    serialNmber = d['serialNmber']
+    serialNmber = d['serialNumber']
     imei = d['imei']
     phonenumber = d['phonenumber']
     simOperator = d['simOperator']
-    phoneid = random.randint(100000, 200000)
+    phoneid = d['phoneid']
     dt = d['dt']
     try:
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
