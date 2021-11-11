@@ -132,8 +132,8 @@ def setup():
     except Exception as ex:
         print(ex)
 
-    InsertPhoneInfo(phoneid, phonenumber, imei,
-                    serialNmber, simOperator, date_time_obj)
+    return InsertPhoneInfo(phoneid, phonenumber, imei,
+                           serialNmber, simOperator, date_time_obj)
 
 
 @ app.route("/location", methods=['POST'])
@@ -206,5 +206,4 @@ def hello():
 #         # phoneid = request.form.get('phoneid')
 #     except Exception as ex:
 #         print(ex)
-
 # app.run()
