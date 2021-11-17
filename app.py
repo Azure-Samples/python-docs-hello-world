@@ -32,6 +32,45 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
         return str(ex)
 
 
+def GetlastConfigLine(phoneid):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "SELECT top 1 * FROM config where phoneid='"+phoneid+"' order by id desc"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchall()
+        dic = {}
+        for row in myresult:
+            dic['phoneid'] = row[1]
+            dic['wifiInterval'] = row[2]
+            dic['BluetoothInterval'] = row[3]
+            dic['locationInterval'] = row[4]
+            dic['checkConfigInterval'] = row[5]
+            dic['StartTimeActivation'] = row[6]
+            dic['StopTimeActivation'] = row[7]
+            dic['AllTime'] = row[8]
+            dic['ActivateWifi'] = row[9]
+            dic['ActivateBlueTooth'] = row[10]
+            try:
+
+                ActivateWifiDateTime = row[11].strftime('%d/%m/%y %H:%M:%S')
+                ActivateBlueToothDateTime = row[12].strftime(
+                    '%d/%m/%y %H:%M:%S')
+                dic['ActivateWifiDateTime'] = ActivateWifiDateTime
+                dic['ActivateBlueToothDateTime'] = ActivateBlueToothDateTime
+
+            except Exception as ex:
+                return str(ex)
+            dic['ActivateWifiDuration'] = row[13]
+            dic['ActivateBlueToothDuration'] = row[14]
+
+        con.close()
+        s = json.dumps(dic)
+        return s
+    except Exception as ex:
+        return str(ex)
+
+
 def InsertConfig(phoneid, wifiInterval,
                  BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
                  StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, ActivateWifiDateTime, ActivateBlueToothDateTime, ActivateWifiDuration, ActivateBlueToothDuration):
@@ -126,48 +165,57 @@ def bluetooth():
 #   "ActivateWifiDateTime":"11/11/21 16:31:19","ActivateBlueToothDateTime":"11/11/21 17:31:19","ActivateWifiDuration":5,"ActivateBlueToothDuration":6}
 
 
-@app.route("/config", methods=['POST'])
+@app.route("/config", methods=['GET', 'POST'])
 def config():
-    data = request.get_data()
-    sData = data.decode('utf-8')
-    d = json.loads(sData)
-    phoneid = d['phoneid']  # guid identifying the phone
-    wifiInterval = d['wifiInterval']  # interval in minutes
-    BluetoothInterval = d['BluetoothInterval']  # interval in minutes
-    locationInterval = d['locationInterval']  # interval in minutes
-    checkConfigInterval = d['checkConfigInterval']  # interval in minutes
-    StartTimeActivation = d['StartTimeActivation']  # number: hour from 1-24
-    StopTimeActivation = d['StopTimeActivation']  # number: hour from 1-24
-    # boolean if true will activate all time no matter what StartTimeActivation and StopTimeActivation are.
-    AllTime = d['AllTime']
-    # boolean if true will activate wifi from ActivateWifiDateTime (dateTime) for  ActivateWifiDuration minutes
-    ActivateWifi = d['ActivateWifi']
-    # boolean if true will activate wifi from ActivateBlueToothDateTime (dateTime) for  ActivateBlueToothDuration minutes
-    ActivateBlueTooth = d['ActivateBlueTooth']
-    # the datetime to start activate wifi if ActivateWifi is true
-    ActivateWifiDateTime = d['ActivateWifiDateTime']
-    # the datetime to start activate blueTooth if ActivateWifi is true
-    ActivateBlueToothDateTime = d['ActivateBlueToothDateTime']
-    # the duration of wifi activation
-    ActivateWifiDuration = d["ActivateWifiDuration"]
-    # the duration of bluetooth activation
-    ActivateBlueToothDuration = d["ActivateBlueToothDuration"]
+    if (request.method == 'POST'):
+        data = request.get_data()
+        sData = data.decode('utf-8')
+        d = json.loads(sData)
+        phoneid = d['phoneid']  # guid identifying the phone
+        wifiInterval = d['wifiInterval']  # interval in minutes
+        BluetoothInterval = d['BluetoothInterval']  # interval in minutes
+        locationInterval = d['locationInterval']  # interval in minutes
+        checkConfigInterval = d['checkConfigInterval']  # interval in minutes
+        # number: hour from 1-24
+        StartTimeActivation = d['StartTimeActivation']
+        StopTimeActivation = d['StopTimeActivation']  # number: hour from 1-24
+        # boolean if true will activate all time no matter what StartTimeActivation and StopTimeActivation are.
+        AllTime = d['AllTime']
+        # boolean if true will activate wifi from ActivateWifiDateTime (dateTime) for  ActivateWifiDuration minutes
+        ActivateWifi = d['ActivateWifi']
+        # boolean if true will activate wifi from ActivateBlueToothDateTime (dateTime) for  ActivateBlueToothDuration minutes
+        ActivateBlueTooth = d['ActivateBlueTooth']
+        # the datetime to start activate wifi if ActivateWifi is true
+        ActivateWifiDateTime = d['ActivateWifiDateTime']
+        # the datetime to start activate blueTooth if ActivateWifi is true
+        ActivateBlueToothDateTime = d['ActivateBlueToothDateTime']
+        # the duration of wifi activation
+        ActivateWifiDuration = d["ActivateWifiDuration"]
+        # the duration of bluetooth activation
+        ActivateBlueToothDuration = d["ActivateBlueToothDuration"]
 
-    try:
-        wifiDate = datetime. strptime(
-            ActivateWifiDateTime, '%d/%m/%y %H:%M:%S')
-        blueToothDate = datetime. strptime(
-            ActivateBlueToothDateTime, '%d/%m/%y %H:%M:%S')
-    except Exception as ex:
-        print(ex)
+        try:
+            wifiDate = datetime. strptime(
+                ActivateWifiDateTime, '%d/%m/%y %H:%M:%S')
+            blueToothDate = datetime. strptime(
+                ActivateBlueToothDateTime, '%d/%m/%y %H:%M:%S')
+        except Exception as ex:
+            print(ex)
 
-    try:
-        ret = InsertConfig(phoneid, wifiInterval,
-                           BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
-                           StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, wifiDate, blueToothDate, ActivateWifiDuration, ActivateBlueToothDuration)
-        return ret
-    except Exception as ex:
-        return str(ex)
+        try:
+            ret = InsertConfig(phoneid, wifiInterval,
+                               BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
+                               StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, wifiDate, blueToothDate, ActivateWifiDuration, ActivateBlueToothDuration)
+            return ret
+        except Exception as ex:
+            return str(ex)
+    else:
+        try:
+            phoneid = request.args["phoneid"]
+            ret = GetlastConfigLine(phoneid)
+            return ret
+        except Exception as ex:
+            return str(ex)
 
 
 @app.route("/wifi", methods=['POST'])
@@ -277,4 +325,3 @@ def hello():
 #         # phoneid = request.form.get('phoneid')
 #     except Exception as ex:
 #         print(ex)
-# app.run()
