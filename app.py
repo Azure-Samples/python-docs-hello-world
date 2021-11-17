@@ -32,6 +32,27 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
         return str(ex)
 
 
+def InsertConfig(phoneid, wifiInterval,
+                 BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
+                 StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, ActivateWifiDateTime, ActivateBlueToothDateTime, ActivateWifiDuration, ActivateBlueToothDuration):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.config(phoneid, wifiInterval," + \
+            "BluetoothInterval, locationInterval,checkConfigInterval,StartTimeActivation," +\
+            "StopTimeActivation,AllTime,ActivateWifi,ActivateBlueTooth,ActivateWifiDateTime,ActivateBlueToothDateTime,ActivateWifiDuration,ActivateBlueToothDuration)" +\
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) "
+
+        mycursor.execute(sql, (phoneid, wifiInterval,
+                               BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
+                               StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, ActivateWifiDateTime, ActivateBlueToothDateTime, ActivateWifiDuration, ActivateBlueToothDuration))
+        con.commit()
+        con.close()
+        return "Succeded"
+    except Exception as ex:
+        return str(ex)
+
+
 def InsertPhoneInfo(phoneid, phonenumber, imei, serialNumber, simOperator, dt):
     try:
         con = pyodbc.connect(sCon)
@@ -97,6 +118,56 @@ def bluetooth():
     except Exception as ex:
         print(ex)
     return InsertBluetooth(name, code, address, rssi, phoneid, date_time_obj)
+
+# http://127.0.0.1:5000/config
+# payload
+# {"phoneid":"7406b194-a792-4bb2-9bfb-3a6d0ff74957","wifiInterval":1,"BluetoothInterval":2,"locationInterval":3,"checkConfigInterval":4,"StartTimeActivation":"16:31:19",
+# "StopTimeActivation":"16:41:19","StartTimeActivation":13,"StopTimeActivation":14,"AllTime":1,"ActivateWifi":0,"ActivateBlueTooth":1,
+#   "ActivateWifiDateTime":"11/11/21 16:31:19","ActivateBlueToothDateTime":"11/11/21 17:31:19","ActivateWifiDuration":5,"ActivateBlueToothDuration":6}
+
+
+@app.route("/config", methods=['POST'])
+def config():
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    phoneid = d['phoneid']  # guid identifying the phone
+    wifiInterval = d['wifiInterval']  # interval in minutes
+    BluetoothInterval = d['BluetoothInterval']  # interval in minutes
+    locationInterval = d['locationInterval']  # interval in minutes
+    checkConfigInterval = d['checkConfigInterval']  # interval in minutes
+    StartTimeActivation = d['StartTimeActivation']  # number: hour from 1-24
+    StopTimeActivation = d['StopTimeActivation']  # number: hour from 1-24
+    # boolean if true will activate all time no matter what StartTimeActivation and StopTimeActivation are.
+    AllTime = d['AllTime']
+    # boolean if true will activate wifi from ActivateWifiDateTime (dateTime) for  ActivateWifiDuration minutes
+    ActivateWifi = d['ActivateWifi']
+    # boolean if true will activate wifi from ActivateBlueToothDateTime (dateTime) for  ActivateBlueToothDuration minutes
+    ActivateBlueTooth = d['ActivateBlueTooth']
+    # the datetime to start activate wifi if ActivateWifi is true
+    ActivateWifiDateTime = d['ActivateWifiDateTime']
+    # the datetime to start activate blueTooth if ActivateWifi is true
+    ActivateBlueToothDateTime = d['ActivateBlueToothDateTime']
+    # the duration of wifi activation
+    ActivateWifiDuration = d["ActivateWifiDuration"]
+    # the duration of bluetooth activation
+    ActivateBlueToothDuration = d["ActivateBlueToothDuration"]
+
+    try:
+        wifiDate = datetime. strptime(
+            ActivateWifiDateTime, '%d/%m/%y %H:%M:%S')
+        blueToothDate = datetime. strptime(
+            ActivateBlueToothDateTime, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+
+    try:
+        ret = InsertConfig(phoneid, wifiInterval,
+                           BluetoothInterval, locationInterval, checkConfigInterval, StartTimeActivation,
+                           StopTimeActivation, AllTime, ActivateWifi, ActivateBlueTooth, wifiDate, blueToothDate, ActivateWifiDuration, ActivateBlueToothDuration)
+        return ret
+    except Exception as ex:
+        return str(ex)
 
 
 @app.route("/wifi", methods=['POST'])
@@ -206,4 +277,4 @@ def hello():
 #         # phoneid = request.form.get('phoneid')
 #     except Exception as ex:
 #         print(ex)
-# app.run()
+app.run()
