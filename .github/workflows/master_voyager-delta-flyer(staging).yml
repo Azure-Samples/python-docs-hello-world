@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - voyager-delta-flyer
 on:
   push:
     branches:
-      - master
+      - staging
   workflow_dispatch:
 
 jobs:
