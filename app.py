@@ -238,10 +238,13 @@ def config():
         try:
             phoneid = request.args["phoneid"]
             ret = GetlastConfigLine(phoneid)
+            if (ret == '{}'):
+                return GetDefaultConfigLine(phoneid)
+
             return ret
         except Exception as ex:
-            # return GetDefaultConfigLine(phoneid)
-            return str(ex)
+            return GetDefaultConfigLine(phoneid)
+            # return str(ex)
 
 
 @app.route("/wifi", methods=['POST'])
