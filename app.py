@@ -53,9 +53,9 @@ def GetlastConfigLine(phoneid):
             dic['ActivateBlueTooth'] = row[10]
             try:
 
-                ActivateWifiDateTime = row[11].strftime('%d/%m/%y %H:%M:%S')
+                ActivateWifiDateTime = row[11].strftime('%d-%m-%y %H:%M:%S')
                 ActivateBlueToothDateTime = row[12].strftime(
-                    '%d/%m/%y %H:%M:%S')
+                    '%d-%m-%y %H:%M:%S')
                 dic['ActivateWifiDateTime'] = ActivateWifiDateTime
                 dic['ActivateBlueToothDateTime'] = ActivateBlueToothDateTime
 
@@ -158,11 +158,16 @@ def bluetooth():
         print(ex)
     return InsertBluetooth(name, code, address, rssi, phoneid, date_time_obj)
 
+# Post
 # http://127.0.0.1:5000/config
 # payload
 # {"phoneid":"7406b194-a792-4bb2-9bfb-3a6d0ff74957","wifiInterval":1,"BluetoothInterval":2,"locationInterval":3,"checkConfigInterval":4,"StartTimeActivation":"16:31:19",
 # "StopTimeActivation":"16:41:19","StartTimeActivation":13,"StopTimeActivation":14,"AllTime":1,"ActivateWifi":0,"ActivateBlueTooth":1,
 #   "ActivateWifiDateTime":"11/11/21 16:31:19","ActivateBlueToothDateTime":"11/11/21 17:31:19","ActivateWifiDuration":5,"ActivateBlueToothDuration":6}
+#
+# get
+# https://locatorwb.azurewebsites.net/config?phoneid=7406b194-a792-4bb2-9bfb-3a6d0ff74957
+# in get version the function will get the last line of config that relates to the phoneid
 
 
 @app.route("/config", methods=['GET', 'POST'])
@@ -306,22 +311,4 @@ def hello():
         return (str(ex))
 
 
-# @app.route("/location", methods=['POST'])
-# def Location():
-#     try:
-#         content = request.get_json()
-#         lot = content["longitude"]
-#         lat = content["latitude"]
-#         sdt = content["datetime"]
-#         phoneid = content["phoneid"]
-#         dt = datetime.strptime(sdt, '%d/%m/%y %H:%M:%S')
-#         InsertLocation(lot, lat, phoneid, dt)
-
-#         data = json.dumps(content)
-#         print(data)
-#         # datetime = request.form.get('datetime')
-#         # longitude = request.form.get('longitude')
-#         # Latitude = request.form.get('latitude')
-#         # phoneid = request.form.get('phoneid')
-#     except Exception as ex:
-#         print(ex)
+# app.run()
