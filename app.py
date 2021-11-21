@@ -44,8 +44,8 @@ def GetDefaultConfigLine(phoneid):
     dic['AllTime'] = "True"
     dic['ActivateWifi'] = 0
     dic['ActivateBlueTooth'] = 0
-    dic['ActivateWifiDateTime'] = "01/01/99 16:40:19"
-    dic['ActivateBlueToothDateTime'] = "01/01/99 16:40:19"
+    dic['ActivateWifiDateTime'] = "01-01-99 16:40:19"
+    dic['ActivateBlueToothDateTime'] = "01-01-99 16:40:19"
     dic['ActivateWifiDuration'] = 0
     dic['ActivateBlueToothDuration'] = 0
     s = json.dumps(dic)
