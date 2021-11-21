@@ -32,6 +32,26 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
         return str(ex)
 
 
+def GetDefaultConfigLine(phoneid):
+    dic = {}
+    dic['phoneid'] = phoneid
+    dic['wifiInterval'] = 10
+    dic['BluetoothInterval'] = 10
+    dic['locationInterval'] = 10
+    dic['checkConfigInterval'] = 5
+    dic['StartTimeActivation'] = 1
+    dic['StopTimeActivation'] = 3
+    dic['AllTime'] = "True"
+    dic['ActivateWifi'] = 0
+    dic['ActivateBlueTooth'] = 0
+    dic['ActivateWifiDateTime'] = "01/01/99 16:40:19"
+    dic['ActivateBlueToothDateTime'] = "01/01/99 16:40:19"
+    dic['ActivateWifiDuration'] = 0
+    dic['ActivateBlueToothDuration'] = 0
+    s = json.dumps(dic)
+    return s
+
+
 def GetlastConfigLine(phoneid):
     try:
         con = pyodbc.connect(sCon)
@@ -220,6 +240,7 @@ def config():
             ret = GetlastConfigLine(phoneid)
             return ret
         except Exception as ex:
+            # return GetDefaultConfigLine(phoneid)
             return str(ex)
 
 
@@ -311,4 +332,4 @@ def hello():
         return (str(ex))
 
 
-# app.run()
+app.run()
