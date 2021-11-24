@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - vogeger-flayers
 on:
   push:
     branches:
-      - master
+      - staging
   workflow_dispatch:
 
 jobs:
