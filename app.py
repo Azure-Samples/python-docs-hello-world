@@ -112,14 +112,14 @@ def InsertConfig(phoneid, wifiInterval,
         return str(ex)
 
 
-def InsertPhoneInfo(phoneid, phonenumber, imei, serialNumber, simOperator, dt):
+def InsertPhoneInfo(phoneid, phonenumber, imei, serialNumber, simOperator, dt, manufacturer, model, version, versionRelease):
     try:
         con = pyodbc.connect(sCon)
         mycursor = con.cursor()
-        sql = "INSERT INTO dbo.phone(phoneid, phonenumber, imei, serialNumber, simOperator,dt) VALUES (?,?,?,?,?,?) "
+        sql = "INSERT INTO dbo.phone(phoneid, phonenumber, imei, serialNumber, simOperator,dt, manufacturer, model, version, versionRelease) VALUES (?,?,?,?,?,?,?,?,?,?) "
 
         mycursor.execute(sql, (phoneid, phonenumber, imei,
-                         serialNumber, simOperator, dt))
+                         serialNumber, simOperator, dt, manufacturer, model, version, versionRelease))
         con.commit()
         con.close()
         return "Succeded"
@@ -275,13 +275,17 @@ def setup():
     simOperator = d['simOperator']
     phoneid = d['phoneid']
     dt = d['dt']
+    manufacturer = d["manufacturer"]
+    model = d["model"]
+    version = d["version"]
+    versionRelease = d["versionRelease"]
     try:
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
     except Exception as ex:
         print(ex)
 
     return InsertPhoneInfo(phoneid, phonenumber, imei,
-                           serialNmber, simOperator, date_time_obj)
+                           serialNmber, simOperator, date_time_obj, manufacturer, model, version, versionRelease)
 
 
 @ app.route("/location", methods=['POST'])
