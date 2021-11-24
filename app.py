@@ -320,6 +320,35 @@ def getName():
     return data
 
 
+def InsertLoLog(phoneid, dt, msg):
+    try:
+        con = pyodbc.connect(sCon)
+        mycursor = con.cursor()
+        sql = "INSERT INTO dbo.Logs(phoneid, dt, msg) VALUES (?,?,?) "
+
+        mycursor.execute(sql, (phoneid, dt, msg))
+        con.commit()
+        con.close()
+        return "Succeded"
+    except Exception as ex:
+        return str(ex)
+
+
+@app.route("/log",  methods=['POST'])
+def Log():
+    data = request.get_data()
+    sData = data.decode('utf-8')
+    d = json.loads(sData)
+    dt = d['dt']
+    phoneid = d['phoneid']
+    msg = d["msg"]
+    try:
+        date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+    InsertLoLog(phoneid, date_time_obj, msg)
+
+
 @ app.route("/")
 def hello():
     try:
