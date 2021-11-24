@@ -346,7 +346,7 @@ def Log():
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
     except Exception as ex:
         print(ex)
-    InsertLoLog(phoneid, date_time_obj, msg)
+    return InsertLoLog(phoneid, date_time_obj, msg)
 
 
 @ app.route("/")
