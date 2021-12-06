@@ -35,10 +35,10 @@ def InsertWifi(ssid, mac, level, phoneid, dt):
 def GetDefaultConfigLine(phoneid):
     dic = {}
     dic['phoneid'] = phoneid
-    dic['wifiInterval'] = 10
-    dic['BluetoothInterval'] = 10
-    dic['locationInterval'] = 10
-    dic['checkConfigInterval'] = 5
+    dic['wifiInterval'] = 2
+    dic['BluetoothInterval'] = 2
+    dic['locationInterval'] = 1
+    dic['checkConfigInterval'] = 3
     dic['StartTimeActivation'] = 1
     dic['StopTimeActivation'] = 3
     dic['AllTime'] = "True"
