@@ -141,13 +141,14 @@ def InsertBluetooth(name, code, address, rssi, phoneid, dt):
         return str(ex)
 
 
-def InsertLocation(lot, lat, dt, phoneid, accuracy, speed):
+def InsertLocation(lot, lat, dt, phoneid, accuracy, speed, sendTime):
     try:
         con = pyodbc.connect(sCon)
         mycursor = con.cursor()
-        sql = "INSERT INTO dbo.Location(Longitute, Latitude,dt,phoneid,accuracy,speed) VALUES (?,?,?,?,?,?) "
+        sql = "INSERT INTO dbo.Location(Longitute, Latitude,dt,phoneid,accuracy,speed,SendTime) VALUES (?,?,?,?,?,?,?) "
 
-        mycursor.execute(sql, (lot, lat, dt, phoneid, accuracy, speed))
+        mycursor.execute(sql, (lot, lat, dt, phoneid,
+                         accuracy, speed, sendTime))
         con.commit()
         con.close()
         return "Succeded"
@@ -301,12 +302,19 @@ def location():
     phoneid = d['phoneid']
     accuracy = d['accuracy']
     speed = d['speed']
+    sendTime = d['sendTime']
+
     try:
         date_time_obj = datetime. strptime(dt, '%d/%m/%y %H:%M:%S')
     except Exception as ex:
         print(ex)
 
-    return InsertLocation(Longitute, Latitude, date_time_obj, phoneid, accuracy, speed)
+    try:
+        sendTimeStr = datetime. strptime(sendTime, '%d/%m/%y %H:%M:%S')
+    except Exception as ex:
+        print(ex)
+
+    return InsertLocation(Longitute, Latitude, date_time_obj, phoneid, accuracy, speed, sendTimeStr)
 
 
 @ app.route("/getName")
