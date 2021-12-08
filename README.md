@@ -1,5 +1,6 @@
 ---
 page_type: sample
+server application for Android locator
 description: "A minimal sample app that can be used to demonstrate deploying Flask apps to Azure App Service on Linux."
 languages:
 - python
