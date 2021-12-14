@@ -49,6 +49,7 @@ def GetDefaultConfigLine(phoneid):
     dic['ActivateWifiDuration'] = 0
     dic['ActivateBlueToothDuration'] = 0
     s = json.dumps(dic)
+    # xx
     return s
 
 
