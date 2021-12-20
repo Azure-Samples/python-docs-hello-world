@@ -152,7 +152,7 @@ def InsertLocation(lot, lat, dt, phoneid, accuracy, speed, sendTime):
                          accuracy, speed, sendTime))
         con.commit()
         con.close()
-        return "Succeded1"
+        return "Succeded2"
     except Exception as ex:
         return str(ex)
 
