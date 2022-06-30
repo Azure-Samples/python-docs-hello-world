@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - gurb5
 on:
   push:
     branches:
-      - master
+      - staging
   workflow_dispatch:
 
 jobs:
