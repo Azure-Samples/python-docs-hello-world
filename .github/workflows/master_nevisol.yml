@@ -8,6 +8,8 @@ on:
   push:
     branches:
       - master
+      - st1
+      - st2
   workflow_dispatch:
 
 jobs:
