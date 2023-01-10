@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'nevisol'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F47CD3DAF643427DAA28446D53B80B01 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_24663C0DEFC04D48AE79A458BABE01C8 }}
