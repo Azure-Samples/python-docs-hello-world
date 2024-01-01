@@ -1,0 +1,25 @@
+{% extends 'base.jinja2' %}
+
+{% block content %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='../styles/sign_up.css') }}">
+<form method="POST">
+    <h3 class="heading">Sign Up</h3>
+    <div class="col">
+        <form class="col s2">
+            <div class="col">
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="icon_prefix" type="text" class="validate">
+                    <label for="icon_prefix">First Namez</label>
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">phone</i>
+                    <input id="icon_telephone" type="tel" class="validate">
+                    <label for="icon_telephone">Telephone</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</form>
+
+{% endblock %}
